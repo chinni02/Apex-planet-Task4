@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All-in-One Portfolio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>🌟 My Portfolio Website</h1>
+</header>
+
+<nav>
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+  <a href="#todo">To-Do</a>
+  <a href="#products">Products</a>
+  <a href="#quiz">Quiz</a>
+  <a href="#carousel">Carousel</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- About Section -->
+<section id="about">
+  <h2>👋 About Me</h2>
+  <p>Hello! I'm a web developer passionate about JavaScript, CSS, and building creative user experiences. Welcome to my multi-feature web project!</p>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+  <h2>🛠 Projects</h2>
+  <ul>
+    <li>✅ Responsive Portfolio Website</li>
+    <li>✅ To-Do App with LocalStorage</li>
+    <li>✅ Product Page with Filter/Sort</li>
+    <li>✅ Interactive Quiz</li>
+    <li>✅ Image Carousel</li>
+  </ul>
+</section>
+
+<!-- To-Do Section -->
+<section id="todo">
+  <h2>📝 To-Do List</h2>
+  <input id="taskInput" placeholder="Add a new task..." />
+  <button onclick="addTask()">Add Task</button>
+  <ul id="taskList"></ul>
+</section>
+
+<!-- Product Listing Section -->
+<section id="products">
+  <h2>🛍 Product Listing</h2>
+  <label>Filter:</label>
+  <select id="filter" onchange="renderProducts()">
+    <option value="all">All</option>
+    <option value="books">Books</option>
+    <option value="tech">Tech</option>
+  </select>
+
+  <label>Sort:</label>
+  <select id="sort" onchange="renderProducts()">
+    <option value="asc">Low to High</option>
+    <option value="desc">High to Low</option>
+  </select>
+
+  <div class="grid grid-2" id="productGrid"></div>
+</section>
+
+<!-- Quiz Section -->
+<section id="quiz">
+  <h2>🧠 Quiz</h2>
+  <p id="question">Loading...</p>
+  <button onclick="choose('a')">Option A</button>
+  <button onclick="choose('b')">Option B</button>
+  <p id="quizResult"></p>
+  <p id="quizScore"></p>
+</section>
+
+<!-- Carousel Section -->
+<section id="carousel">
+  <h2>🖼 Image Carousel</h2>
+  <img id="carouselImage" src="https://via.placeholder.com/600x250?text=Image+1" />
+  <div>
+    <button onclick="prevImage()">Prev</button>
+    <button onclick="nextImage()">Next</button>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+  <h2>📧 Contact Me</h2>
+  <form onsubmit="event.preventDefault(); alert('Message sent!')">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+<script src="script.js"></script>
+</body>
+</html>

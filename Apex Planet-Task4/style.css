@@ -1,0 +1,104 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  background: #f7f9fc;
+  transition: background 0.3s;
+}
+
+header {
+  background: #333;
+  color: white;
+  padding: 1em;
+  text-align: center;
+}
+
+nav {
+  background: #222;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+nav a {
+  color: white;
+  padding: 1em;
+  text-decoration: none;
+}
+
+nav a:hover {
+  background: #555;
+}
+
+section {
+  padding: 2em;
+  margin: 1em auto;
+  border-radius: 10px;
+  max-width: 1000px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+#about    { background: #e3f2fd; }
+#projects { background: #fce4ec; }
+#todo     { background: #f1f8e9; }
+#products { background: #fff3e0; }
+#quiz     { background: #ede7f6; }
+#carousel { background: #e0f2f1; }
+#contact  { background: #fbe9e7; }
+
+h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.grid {
+  display: grid;
+  gap: 2em;
+}
+
+@media (min-width: 768px) {
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+}
+
+#taskList li {
+  margin: 0.5em 0;
+}
+
+.product {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+#carousel img {
+  width: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  border-radius: 8px;
+  background: #fff;
+}
+
+button {
+  padding: 0.5em 1em;
+  margin: 0.5em 0.5em 0 0;
+  border: none;
+  border-radius: 5px;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #45a049;
+}
+
+input, textarea, select {
+  padding: 0.5em;
+  width: 100%;
+  margin-bottom: 1em;
+  box-sizing: border-box;
+}
+
+.correct { background-color: #c8e6c9; }
+.wrong   { background-color: #ffcdd2; }
