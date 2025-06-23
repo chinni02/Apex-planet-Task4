@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>All-in-One Portfolio</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: #1e1e2f; /* Thicker dark background */
+      color: #f0f0f0;
+      transition: background 0.3s;
+    }
+
+    header {
+      background: #121212;
+      color: #fff;
+      padding: 1em;
+      text-align: center;
+    }
+
+    nav {
+      background: #000;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    nav a {
+      color: #fff;
+      padding: 1em;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      background: #444;
+    }
+
+    section {
+      padding: 2em;
+      margin: 1em auto;
+      border-radius: 10px;
+      max-width: 1000px;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.05);
+    }
+
+    #about    { background: #2c2f4a; }
+    #projects { background: #3a2d3d; }
+    #todo     { background: #2a4a2c; }
+    #products { background: #4a3c2c; }
+    #quiz     { background: #3c2d4a; }
+    #carousel { background: #2d4a4a; }
+    #contact  { background: #4a2f2f; }
+
+    h2 {
+      color: #ffeb3b;
+      text-align: center;
+      margin-bottom: 1em;
+    }
+
+    .grid {
+      display: grid;
+      gap: 2em;
+    }
+
+    @media (min-width: 768px) {
+      .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    #taskList li {
+      margin: 0.5em 0;
+    }
+
+    .product {
+      background: #fff;
+      color: #000;
+      border: 1px solid #ccc;
+      padding: 1em;
+      border-radius: 5px;
+    }
+
+    #carousel img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: contain; 
+      border-radius: 8px;
+      background: #fff; 
+    }
+
+    button {
+      padding: 0.5em 1em;
+      margin: 0.5em 0.5em 0 0;
+      border: none;
+      border-radius: 5px;
+      background: #ff9800;
+      color: white;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #fb8c00;
+    }
+
+    input, textarea, select {
+      padding: 0.5em;
+      width: 100%;
+      margin-bottom: 1em;
+      box-sizing: border-box;
+    }
+
+    .correct { background-color: #388e3c; color: white; }
+    .wrong   { background-color: #d32f2f; color: white; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>🌟 My Portfolio Website</h1>
+</header>
+
+<nav>
+  <a href="#about">About</a>
+  <a href="#projects">Projects</a>
+  <a href="#todo">To-Do</a>
+  <a href="#products">Products</a>
+  <a href="#quiz">Quiz</a>
+  <a href="#carousel">Carousel</a>
+  <a href="#contact">Contact</a>
+</nav>
+
+<!-- Updated About Section -->
+<section id="about">
+  <h2>👋 About Me</h2>
+  <p>Hi there! I'm a full-stack web developer with a passion for solving real-world problems using clean, efficient code. I specialize in JavaScript frameworks, responsive UI/UX, and love experimenting with emerging technologies like AI and WebAssembly.</p>
+</section>
+
+<!-- Projects Section -->
+<section id="projects">
+  <h2>🛠 Projects</h2>
+  <ul>
+    <li>✅ Basic Portfolio Website</li>
+    <li>✅ Simple Calculator</li>
+    <li>✅ Password Generator</li>
+    <li>✅ Interactive Quiz</li>
+    <li>✅ Image Carousel</li>
+  </ul>
+</section>
+
+<!-- To-Do Section -->
+<section id="todo">
+  <h2>📝 To-Do List</h2>
+  <input id="taskInput" placeholder="Add a new task..." />
+  <button onclick="addTask()">Add Task</button>
+  <ul id="taskList"></ul>
+</section>
+
+<!-- Updated Product Listing -->
+<section id="products">
+  <h2>🛍 Product Listing</h2>
+  <label>Filter:</label>
+  <select id="filter" onchange="renderProducts()">
+    <option value="all">All</option>
+    <option value="books">Books</option>
+    <option value="tech">Tech</option>
+  </select>
+
+  <label>Sort:</label>
+  <select id="sort" onchange="renderProducts()">
+    <option value="asc">Low to High</option>
+    <option value="desc">High to Low</option>
+  </select>
+
+  <div class="grid grid-2" id="productGrid"></div>
+</section>
+
+<!-- Updated Quiz Section -->
+<section id="quiz">
+  <h2>🧠 Quiz</h2>
+  <p id="question">Loading...</p>
+  <button onclick="choose('a')">Option A</button>
+  <button onclick="choose('b')">Option B</button>
+  <p id="quizResult"></p>
+  <p id="quizScore"></p>
+</section>
+
+<!-- Carousel Section -->
+<section id="carousel">
+  <h2>🖼 Image Carousel</h2>
+  <img id="carouselImage" src="https://via.placeholder.com/600x250?text=Image+1" />
+  <div>
+    <button onclick="prevImage()">Prev</button>
+    <button onclick="nextImage()">Next</button>
+  </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+  <h2>📧 Contact Me</h2>
+  <form onsubmit="event.preventDefault(); alert('Message sent!')">
+    <input type="text" placeholder="Your Name" required />
+    <input type="email" placeholder="Your Email" required />
+    <textarea placeholder="Your Message" rows="4" required></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+<script>
+  // To-Do App
+  let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+  const taskList = document.getElementById('taskList');
+  const taskInput = document.getElementById('taskInput');
+
+  function renderTasks() {
+    taskList.innerHTML = '';
+    tasks.forEach((t, i) => {
+      const li = document.createElement('li');
+      li.innerHTML = `${t} <button onclick="deleteTask(${i})">❌</button>`;
+      taskList.appendChild(li);
+    });
+  }
+
+  function addTask() {
+    const task = taskInput.value.trim();
+    if (task) {
+      tasks.push(task);
+      taskInput.value = '';
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+      renderTasks();
+    }
+  }
+
+  function deleteTask(i) {
+    tasks.splice(i, 1);
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+    renderTasks();
+  }
+
+  renderTasks();
+
+  // Updated Product List
+  const products = [
+    { name: 'Smartwatch', category: 'tech', price: 150 },
+    { name: 'Bluetooth Speaker', category: 'tech', price: 90 },
+    { name: 'Science Fiction Book', category: 'books', price: 30 },
+    { name: 'Cookbook Deluxe', category: 'books', price: 40 }
+  ];
+
+  function renderProducts() {
+    const filter = document.getElementById('filter').value;
+    const sort = document.getElementById('sort').value;
+    let filtered = filter === 'all' ? [...products] : products.filter(p => p.category === filter);
+    filtered.sort((a, b) => sort === 'asc' ? a.price - b.price : b.price - a.price);
+
+    const grid = document.getElementById('productGrid');
+    grid.innerHTML = '';
+    filtered.forEach(p => {
+      grid.innerHTML += `<div class="product"><strong>${p.name}</strong><br>Category: ${p.category}<br>Price: $${p.price}</div>`;
+    });
+  }
+
+  renderProducts();
+
+  // Updated Quiz
+  const quiz = [
+    { q: "What does CSS stand for?", a: "Cascading Style Sheets", b: "Computer Style Sheets", correct: "a" },
+    { q: "Which language runs in the browser?", a: "Python", b: "JavaScript", correct: "b" },
+    { q: "Which tag is used for JavaScript?", a: "<script>", b: "<js>", correct: "a" },
+    { q: "What does HTML do?", a: "Defines webpage structure", b: "Handles backend", correct: "a" }
+  ];
+  let currentQ = 0;
+  let score = 0;
+
+  function loadQuiz() {
+    const q = quiz[currentQ];
+    document.getElementById('question').textContent = q.q;
+    const btns = document.querySelectorAll("#quiz button");
+    btns[0].textContent = "A: " + q.a;
+    btns[1].textContent = "B: " + q.b;
+    btns.forEach(b => b.classList.remove("correct", "wrong"));
+    document.getElementById('quizResult').textContent = '';
+  }
+
+  function choose(ans) {
+    const correct = quiz[currentQ].correct;
+    const result = ans === correct ? "✅ Correct!" : "❌ Wrong!";
+    if (ans === correct) score++;
+
+    const btns = document.querySelectorAll("#quiz button");
+    btns[ans === 'a' ? 0 : 1].classList.add(ans === correct ? "correct" : "wrong");
+
+    document.getElementById('quizResult').textContent = result;
+    document.getElementById('quizScore').textContent = `Score: ${score}/${quiz.length}`;
+
+    currentQ = (currentQ + 1) % quiz.length;
+    setTimeout(loadQuiz, 1500);
+  }
+
+  loadQuiz();
+
+  // Carousel
+  const images = [
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQskd7rIFJ9mDqWBIxPD-pywFzWHD07H9DuYw&s",
+    "https://assets.architecturaldigest.in/photos/67ca91c1ec4cc4750b79bc18/16:9/w_1616,h_909,c_limit/louis.jpg",
+    "https://cdn.britannica.com/84/73184-050-05ED59CB/Sunflower-field-Fargo-North-Dakota.jpg"
+  ];
+  let imgIndex = 0;
+  const carouselImage = document.getElementById('carouselImage');
+
+  function showImage() {
+    carouselImage.src = images[imgIndex];
+  }
+
+  function nextImage() {
+    imgIndex = (imgIndex + 1) % images.length;
+    showImage();
+  }
+
+  function prevImage() {
+    imgIndex = (imgIndex - 1 + images.length) % images.length;
+    showImage();
+  }
+</script>
+
+</body>
+</html>
